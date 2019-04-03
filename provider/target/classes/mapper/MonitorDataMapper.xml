@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.example.demo.mapper.MonitorDataMapper"> 
+	<resultMap id="ListUser" type="com.example.demo.entity.MonitorData">
+		<id property="id" column="ID"/>
+		<result property="monitorId" column="MONITOR_ID"/>
+		<result property="datas" column="DATAS"/>
+		<result property="templateId" column="TEMPLATE_ID"/>
+		<result property="createtm" column="CREATETM"/>
+		<result property="proctm" column="PROCTM" />
+	</resultMap>
+	
+	
+	<select id="findMonitorDataById" parameterType="String" resultMap="ListUser">
+        select * from t_monitor_data where id= #{id}
+    </select>
+    
+    <delete id="deleteById" parameterType="String">
+        delete from t_monitor_data where id=#{id}
+    </delete>
+	
+	
+	<insert id="addMonitorData" parameterType="MonitorData" > 
+        insert into t_monitor_data(id,monitorId,datas,templateId,createtm,proctm)  
+             values(#{id},#{monitorId},#{datas},#{templateId},#{createtm},#{proctm})  
+    </insert>
+	
+	<update id="updateByMonitorData" parameterType="MonitorData">
+	   updata  t_monitor_data set monitorId=#{monitorId},
+	   datas=#{datas},
+	   templateId=#{templateId},
+	   createtm=#{createtm},
+	   proctm=#{proctm}
+	   where id=#{id}
+	</update>
+	
+</mapper>
